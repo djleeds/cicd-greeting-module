@@ -1,13 +1,13 @@
 language: java
 env:
   global:
-  - BASE_VERSION_NUMBER="0.4"
-  - NEXUS_REPOSITORY_ID="htb-nexus"
-  - secure: awf1SWQ/C/4c8gHieR37NRbr9EQ0mmIqLWmvhkhuIgLfxzhkb+uZf5u427mm4n9RpMdeUQcam5PJTswHWbVOEIIE0xyNl1FN3WPASmD7lfiPUCrsTR1f3azY7bMRLgvAHSoiWFCs97A6zfw1ZSkvVBr2Ihc/X0MMmi2wQF+oofs=
+    - BASE_VERSION_NUMBER="0.4"
+    - NEXUS_REPOSITORY_ID="htb-nexus"
+    - secure: N0ZCUpX5yYzwhYG20OqN5JwFjOJleHFPtA71Easy+QLDIXKE4nb10R7fBzbfQDSkVU4XPDD5t1vh88Jqyt+9mpKigfyGZJi7Lpx1U9a5+Xw8VzCiNOCX/+xBy8nFmF/pIAM3D0d02JX5b7fl8U6bHv+jVIxlhGpx+5ENJx5m3vM=
 before_install:
-- mvn versions:set versions:commit -DnewVersion=$BASE_VERSION_NUMBER.$TRAVIS_BUILD_NUMBER
+  - mvn versions:set versions:commit -DnewVersion=$BASE_VERSION_NUMBER.$TRAVIS_BUILD_NUMBER
 script:
-- mvn compile findbugs:check
-- mvn clean package
-after_script:
-- ./travis/deploy.sh >/dev/null
+  - mvn compile findbugs:check
+  - mvn clean package
+after_success:
+  - ./travis/deploy.sh >/dev/null
