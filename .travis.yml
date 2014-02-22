@@ -1,7 +1,14 @@
 language: java
 before_script:
-  - "mvn versions:set versions:commit -DnewVersion=0.4.$TRAVIS_BUILD_NUMBER"
-  - "mvn install -U"
+- mvn versions:set versions:commit -DnewVersion=0.4.$TRAVIS_BUILD_NUMBER
+- mvn install -U
 script:
-  - "mvn compile findbugs:check"
-  - "mvn clean package"
+- mvn compile findbugs:check
+- mvn clean package
+after_script:
+- travis/deploy.sh >/dev/null
+env:
+  global:
+  - BASE_VERSION="0.4"
+  - NEXUS_REPOSITORY_ID="htb-nexus"
+  - secure: SpOfxp7VTk9ON0eDFPpWAr3qHpFG0am6UaXYbjtWBUgS985NZHFQ1e1rByFSVGnoH/SZ7JZusQlFKxIKwvEAPHZm/7G9dPxTskkslYbvJkW9OCNO0CCfH3JYnu+QOzFGMPCcKMFqHtPLp5NKsnT4zrZjp+2BhoB1oLbd1Uni5uk=
