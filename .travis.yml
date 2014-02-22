@@ -1,3 +1,7 @@
 language: java
 before_script:
-  - "mvn versions:set versions:commit -DnewVersion=0.1.$TRAVIS_BUILD_NUMBER"
+  - "mvn versions:set versions:commit -DnewVersion=0.4.$TRAVIS_BUILD_NUMBER"
+  - "mvn install -U"
+script:
+  - "mvn compile findbugs:check"
+  - "mvn clean package"
