@@ -1,1 +1,13 @@
 language: java
+env:
+  global:
+  - BASE_VERSION_NUMBER="0.4"
+  - NEXUS_REPOSITORY_ID="htb-nexus"
+  - secure: awf1SWQ/C/4c8gHieR37NRbr9EQ0mmIqLWmvhkhuIgLfxzhkb+uZf5u427mm4n9RpMdeUQcam5PJTswHWbVOEIIE0xyNl1FN3WPASmD7lfiPUCrsTR1f3azY7bMRLgvAHSoiWFCs97A6zfw1ZSkvVBr2Ihc/X0MMmi2wQF+oofs=
+before_install:
+- mvn versions:set versions:commit -DnewVersion=$BASE_VERSION_NUMBER.$TRAVIS_BUILD_NUMBER
+script:
+- mvn compile findbugs:check
+- mvn clean package
+after_script:
+- ./travis/deploy.sh >/dev/null
